@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import Table from "./Table";
 
 class Search extends Component {
     state = {
@@ -15,7 +16,7 @@ class Search extends Component {
           },
           body: JSON.stringify({ name: this.state.name }),
         });
-        const body = await response.text();    
+        const body = await response.json();    
         this.setState({ responseToPost: body });
     };
 
@@ -24,17 +25,17 @@ class Search extends Component {
         <div className="item">
             <p>Search for stock by name</p>
             <form onSubmit={this.handleSearch}>
-            <input
-                type="text"
-                value={this.state.name}
-                onChange={e => this.setState({ name: e.target.value })}
-                placeholder="Stock name?"
-                required="true"
+                <input
+                    type="text"
+                    value={this.state.name}
+                    onChange={e => this.setState({ name: e.target.value })}
+                    placeholder="Stock name?"
+                    required="true"
 
-            />
-            <button type="submit">Search</button>
+                />
+                <button type="submit">Search</button>
             </form>
-            <p>{this.state.responseToPost}</p>
+            <Table Tdata={this.state.responseToPost} />
         </div>
         );
     }

@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import Table from "./Table";
 
 class Filter extends Component {
     state = {
@@ -16,7 +17,7 @@ class Filter extends Component {
           },
           body: JSON.stringify({ price: this.state.price, order: this.state.order }),
         });
-        const body = await response.text();    
+        const body = await response.json();    
         this.setState({ responseToFilter: body });
     };
 
@@ -43,7 +44,7 @@ class Filter extends Component {
 
                     <button type="submit">Filter</button>
                 </form>
-                <p>{this.state.responseToFilter}</p>
+                <Table Tdata={this.state.responseToFilter} />
             </div>
         );
     }
